@@ -1,0 +1,36 @@
+openapi: 3.1.3
+info:
+  version: 1.0.0
+  title: therssproject v1 REST API
+  description: therssproject's v1 REST API
+  contact:
+    name: Support
+    url: https://therssproject.com
+servers:
+- url: https://api.therssproject.com
+externalDocs:
+  description: therssproject's v1 REST API
+  url: https://www.therssproject.com/documentation
+paths:
+  "/feeds":
+    get:
+      summary: Get a parsed feed based on the given URL
+      description: Get a parsed feed based on the given URL
+      operationId: application/get-feeds
+      parameters:
+        - name: url
+          in: query
+          description: The URL of the feed to parse
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/feed"
+              examples:
+                default:
+                  "$ref": "#/components/examples/feed"
