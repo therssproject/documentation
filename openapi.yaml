@@ -1,4 +1,4 @@
-openapi: 3.1.3
+openapi: 3.1.0
 info:
   version: 1.0.0
   title: therssproject v1 REST API
@@ -30,7 +30,41 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/feed"
-              examples:
-                default:
-                  "$ref": "#/components/examples/feed"
+                "$ref": "#/components/schemas/Feed"
+              # examples:
+              #   default:
+              #     "$ref": "#/components/examples/feed"
+
+components:
+  schemas:
+    # Feed schema
+    Feed:
+      type: object
+      required:
+        - feed_type
+        - entries
+      properties:
+        feed_type:
+          type: string
+          enum: [atom, json, rss0, rss1, rss2]
+        title:
+          type: string
+        description:
+          type: string
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/Entry'
+
+    # Entry schema
+    Entry:
+      type: object
+      properties:
+        url:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        published_at:
+          type: date
