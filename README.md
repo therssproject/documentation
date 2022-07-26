@@ -8,7 +8,7 @@ To be able to create subscriptions and parse feeds using the public API an API k
 
 Go Dashboard > Settings > API Keys to create a key.
 
-Here’s a request to parse the feed `https://www.reddit.com/r/argentina/.rss` using the API key on the `Authorization` header:
+Here’s a request example to parse the feed `https://www.reddit.com/r/argentina/.rss` using the API key on the `Authorization` header:
 
 ```bash
 curl 'https://api.therssproject.com/v1/feeds?url=https%3A%2F%2Fwww.reddit.com%2Fr%2Fargentina%2F.rss' \
@@ -17,9 +17,9 @@ curl 'https://api.therssproject.com/v1/feeds?url=https%3A%2F%2Fwww.reddit.com%2F
 
 ## Create an endpoint
 
-To be subscribe to an feeds (RSS, Atom, *et al*), first create an ”endpoint”. `theressproject` servers will send webhook events with new feed entries to this endpoint.
+To be subscribe to feeds (RSS, Atom, *et al*), first create an ”endpoint”. `theressproject` servers will send webhook events with new feed entries to this endpoint.
 
-An use case example would be to have a "production" and a "staging" endpoints.
+A use case example would be to have a "production" and a "staging" endpoints.
 
 **Attributes**:
 
@@ -51,9 +51,8 @@ curl https://api.therssproject.com/v1/endpoints \
 
 ## Create a feed subscription
 
-Once the endpoint is created, you can subscribe feeds to it by creating a subscription.
+Once the endpoint is registered you can create feed subscriptions attached to the endpoint. `therssproject` will send events with new entries to this endpoint.
 
-Once a subscription is created, `therssproject` will send events with new entries to this endpoint.
 
 **Attributes**:
 
@@ -91,7 +90,7 @@ curl https://api.therssproject.com/v1/subscriptions \
 
 ## Parse feeds
 
-`therssproject` also supports parsing feeds synchronously.
+`therssproject` also supports parsing feeds on demand.
 
 ```bash
 curl 'https://api.therssproject.com/v1/feeds?url=https%3A%2F%2Fwww.reddit.com%2Fr%2Fargentina%2F.rss' \
