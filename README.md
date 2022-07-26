@@ -1,47 +1,80 @@
 # therssproject
 
-This repository contains therssproject public API documentation and examples. In order to use this API create an account on https://www.therssproject.com
+In order to use this API create an account on https://www.therssproject.com
 
-### Create an endpoint
+## Authorization: API Keys
 
-To be able to subscribe to an RSS feed, we must first create an Endpoint. This endpoint will be used to send webhooks with new feed entries. A use case example would be to have a "production" and a "staging" endpoint.
+To be able to create subscriptions and parse feeds using the public API an API key is required. The API key should be sent on the `Authorization` header of every request.
 
-### Create an API key
+Go Dashboard > Settings > API Keys to create a key.
 
-To be able to create subscriptions and parse feeds using the public API (Not the therssproject dashboard), an API key is required. The API key should be sent on the `Authorization` header of every request.
-
-This is an example of a request to parse the reddit https://www.reddit.com/r/argentina/.rss feed sending the API key on the `Authorization` header:
+Here’s a request example to parse the feed `https://www.reddit.com/r/argentina/.rss` using the API key on the `Authorization` header:
 
 ```bash
-curl --request GET \
-  --url 'https://api.therssproject.com/v1/feeds?url=https%3A%2F%2Fwww.reddit.com%2Fr%2Fargentina%2F.rss' \
-  --header 'Authorization: 16f3d624-b4cb-42af-bbbf-ee893a66260d'
+curl 'https://api.therssproject.com/v1/feeds?url=https%3A%2F%2Fwww.reddit.com%2Fr%2Fargentina%2F.rss' \
+  -H 'Authorization: <api-key>'
 ```
 
-### Public API
+## Create an endpoint
 
+To be subscribe to feeds (RSS, Atom, *et al*), first create an ”endpoint”. `theressproject` servers will send webhook events with new feed entries to this endpoint.
 
-#### Create feed subscription
-To create a subscription, a `POST` request should be sent to the `https://api.therssproject.com/v1/subscriptions` endpoint sending the API key on the `Authorization` header.
-The required body attributes are `endpoint`, and `url` which is the RSS feed url. An optional `metadata` attribute  can be used, this attribute will be sent on every webhook.
+A use case example would be to have a "production" and a "staging" endpoints.
 
-Request example:
+**Attributes**:
+
+- `title`: a name for the endpoint
+- `url`: the URL to which `therssproject` will send webhook events to
+
+**Request example**:
 
 ```bash
-curl --request POST \
-  --url 'https://api.therssproject.com/v1/subscriptions?url=https%3A%2F%2Fwww.reddit.com%2Fr%2Fargentina%2F.rss' \
-  --header 'Authorization: 16f3d624-b4cb-42af-bbbf-ee893a66260a' \
-  --header 'Content-Type: application/json' \
-  --data '{
-	"endpoint": "62a553394a314dde29ceee6f",
-	"url": "https://www.reddit.com/r/argentina/.rss",
-	"metadata": {
-		"secret": "foo"
-	}
-}'
+curl https://api.therssproject.com/v1/endpoints \
+  -X POST \
+  -H "Authorization: <api-key>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "My endpoint",
+    "url": "https://myserver.com/webhooks/rss"
+  }'
 ```
 
-Response example:
+**Response example**
+
+```json
+{
+  "id": "62a553394a314dde29ceee6f",
+  "url": "https://myserver.com/webhooks/rss",
+  "created_at": "2022-07-08T22:34:22.765Z"
+}
+```
+
+## Create a feed subscription
+
+Once the endpoint is registered you can create feed subscriptions attached to the endpoint. `therssproject` will send events with new entries to this endpoint.
+
+
+**Attributes**:
+
+- `endpoint`: the ID of the endpoint to send updates to
+- `url`: the feed url
+- `metadata` (optional): a JSON payload to be send in the webhooks events
+
+**Request example**:
+
+```bash
+curl https://api.therssproject.com/v1/subscriptions \
+  -X POST \
+  -H "Authorization: <api-key>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "endpoint": "62a553394a314dde29ceee6f",
+    "url": "https://www.reddit.com/r/argentina/.rss",
+	"metadata": { "foo": "bar" }
+  }'
+```
+
+**Response example**:
 
 ```json
 {
@@ -50,9 +83,34 @@ Response example:
   "url": "https://www.reddit.com/r/argentina/.rss",
   "feed": "62bd190dba7e012d91a9dd58",
   "endpoint": "62a553394a314dde29ceee6f",
-  "metadata": {
-    "secret": "foo"
-  },
+  "metadata": { "foo": "bar" },
   "created_at": "2022-07-08T22:35:39.765Z"
+}
+```
+
+## Parse feeds
+
+`therssproject` also supports parsing feeds on demand.
+
+```bash
+curl 'https://api.therssproject.com/v1/feeds?url=https%3A%2F%2Fwww.reddit.com%2Fr%2Fargentina%2F.rss' \
+  -H 'Authorization: <api-key>'
+```
+
+**Response example**:
+
+```json
+{
+  "feed_type": "atom",
+  "title": "...",
+  "description": "...",
+  "entries": [
+    {
+      "url": "https://www.reddit.com/r/argentina/comments/w6ra48/preguntas_del_domingo/",
+      "title": "Preguntas del Domingo",
+      "description": null,
+      "published_at": "2022-07-24T09:00:16Z"
+    }
+  ]
 }
 ```
