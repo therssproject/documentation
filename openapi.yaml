@@ -12,7 +12,8 @@ externalDocs:
   description: therssproject's v1 REST API
   url: https://www.therssproject.com/documentation
 paths:
-  "/feeds":
+
+  "/v1/feeds":
     get:
       summary: Get a parsed feed based on the given URL
       description: Get a parsed feed based on the given URL
@@ -31,9 +32,65 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Feed"
-              # examples:
-              #   default:
-              #     "$ref": "#/components/examples/feed"
+
+  "/v1/subscriptions":
+    # Create a new subscription
+    post:
+      summary: Create a new feed subscription
+      description: Create a new feed subscription based on the given URL
+      operationId: application/create-subscription
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - url
+                - endpoint
+              properties:
+                url:
+                  type: string
+                  description: The URL of the feed to parse
+                endpoint:
+                  type: string
+                  description: The endpoint ID. (Make sure to create the endpoint first)
+                # TODO: Can we make this attribute optional?
+                metadata:
+                  type: object
+                  description: Optional metadata to be stored with the subscription. This
+                    attribute is sent on webhooks. It is usually used to store information
+                    from external systems to easily identify the subscription.
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Subscription"
+
+    # Query subscriptions
+    get:
+      summary: Query subscriptions
+      description: Query subscriptions
+      operationId: application/query-subscription
+      parameters:
+        - name: from
+          in: query
+          description: ISO string date representing the start date
+          required: false
+          schema:
+            type: string
+
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Subscription"
 
 components:
   schemas:
@@ -67,4 +124,27 @@ components:
         description:
           type: string
         published_at:
+          type: date
+
+    # Subscription schema
+    Subscription:
+      type: object
+      required:
+        - id
+        - url
+        - endpoint
+        - created_at
+      properties:
+        id:
+          type: string
+        url:
+          type: string
+        endpoint:
+          type: string
+        metadata:
+          type: object
+          description: Optional metadata to be stored with the subscription. This
+            attribute is sent on webhooks. It is usually used to store information
+            from external systems to easily identify the subscription.
+        created_at:
           type: date
