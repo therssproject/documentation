@@ -3,26 +3,26 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 
-const DISCORD_WEBHOOK =
-  process.env.DISCORD_WEBHOOK ||
-  "https://discord.com/api/webhooks/1002292754782621747/jqL5Ed890V3bvOKqoALUEZgSxPGya_eUce-5Yae8VxSDkyLdbLTEMLfH0NZHX-_LRkzd";
+const DISCORD_WEBHOOK = process.env.DISCORD_WEBHOOK;
 
-const mkContent = (entry) => [entry.title, "", entry.url].join("\n");
+if (!DISCORD_WEBHOOK) {
+  console.error("No DISCORD_WEBHOOK");
+  process.exit(1);
+}
+
 const report = (n) =>
   n === 1 ? "Sent a message to Discord" : `Sent ${n} messages to Discord`;
 
 app.use(bodyParser.json());
 
 app.post("/webhooks/discord", (req, res) => {
-  const ps = req.body.entries
-    .map(mkContent)
-    .map((content) =>
-      axios.post(
-        DISCORD_WEBHOOK,
-        { content },
-        { headers: { "Content-Type": "application/json" } }
-      )
-    );
+  const ps = req.body.entries.map((entry) =>
+    axios.post(
+      DISCORD_WEBHOOK,
+      { content: `${entry.title}\n${entry.url}` },
+      { headers: { "Content-Type": "application/json" } }
+    )
+  );
 
   Promise.all(ps)
     .then((results) => console.log(report(results.length)))
