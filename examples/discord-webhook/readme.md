@@ -4,7 +4,7 @@ Send messages to a channel on a Discord server using the Discord Webhook Integra
 
 You have to provide the Webhook URL through the `DISCORD_WEBHOOK` environment variable.
 
-![/examples/discord-webhook/assets/discord-webhook-integration.png]
+![](/examples/discord-webhook/assets/discord-webhook-integration.png)
 
 ```bash
 $ yarn install
