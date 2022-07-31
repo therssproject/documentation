@@ -55,7 +55,6 @@ paths:
                 endpoint:
                   type: string
                   description: The endpoint ID. (Make sure to create the endpoint first)
-                # TODO: Can we make this attribute optional?
                 metadata:
                   type: object
                   description: Optional metadata to be stored with the subscription. This
@@ -93,6 +92,19 @@ paths:
                   "$ref": "#/components/schemas/Subscription"
 
   "/v1/subscriptions/{subscription_id}":
+    # Get subscription by ID
+    get:
+      summary: Get subscription by ID
+      description: Get subscription by ID
+      operationId: application/get-subscription
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Subscription"
+
     # Remove subscription by ID
     delete:
       summary: Remove a subscription by ID
