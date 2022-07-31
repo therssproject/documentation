@@ -92,6 +92,15 @@ paths:
                 items:
                   "$ref": "#/components/schemas/Subscription"
 
+    # Remove subscriptions
+    delete:
+      summary: Remove a subscription
+      description: Removes a subscription
+      operationId: application/remove-subscription
+      responses:
+        '200':
+          description: Response
+
 components:
   schemas:
     # Feed schema
