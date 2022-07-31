@@ -92,10 +92,11 @@ paths:
                 items:
                   "$ref": "#/components/schemas/Subscription"
 
-    # Remove subscriptions
+  "/v1/subscriptions/{subscription_id}":
+    # Remove subscription by ID
     delete:
-      summary: Remove a subscription
-      description: Removes a subscription
+      summary: Remove a subscription by ID
+      description: Removes a subscription by ID
       operationId: application/remove-subscription
       responses:
         '200':
