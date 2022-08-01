@@ -11,21 +11,22 @@ if (!DISCORD_WEBHOOK) {
 }
 
 const report = (n) =>
-  n === 1 ? "Sent a message to Discord" : `Sent ${n} messages to Discord`;
+  `Sent message with ${n === 1 ? "one entry" : `${n} entries`} to Discord`;
 
 app.use(bodyParser.json());
 
 app.post("/webhooks/discord", (req, res) => {
-  const ps = req.body.entries.map((entry) =>
-    axios.post(
+  const content = req.body.entries
+    .map((entry) => `${entry.title}\n${entry.url}`)
+    .join("\n\n");
+
+  axios
+    .post(
       DISCORD_WEBHOOK,
-      { content: `${entry.title}\n${entry.url}` },
+      { content },
       { headers: { "Content-Type": "application/json" } }
     )
-  );
-
-  Promise.all(ps)
-    .then((results) => console.log(report(results.length)))
+    .then(() => console.log(report(req.body.entries.length)))
     .catch(() => console.error("Failed to send messages"));
 
   res.send("Ok");
