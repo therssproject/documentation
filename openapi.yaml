@@ -55,7 +55,6 @@ paths:
                 endpoint:
                   type: string
                   description: The endpoint ID. (Make sure to create the endpoint first)
-                # TODO: Can we make this attribute optional?
                 metadata:
                   type: object
                   description: Optional metadata to be stored with the subscription. This
@@ -81,6 +80,7 @@ paths:
           required: false
           schema:
             type: string
+
       responses:
         '200':
           description: Response
@@ -91,8 +91,6 @@ paths:
                 items:
                   "$ref": "#/components/schemas/Subscription"
 
-<<<<<<< Updated upstream
-=======
   "/v1/subscriptions/{subscription_id}":
     # Get subscription by ID
     get:
@@ -153,6 +151,13 @@ paths:
       summary: Query endpoints
       description: Query endpoints
       operationId: application/query-endpoint
+      parameters:
+        - name: from
+          in: query
+          description: ISO string date representing the start date
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: Response
@@ -163,7 +168,6 @@ paths:
                 items:
                   "$ref": "#/components/schemas/Endpoint"
 
->>>>>>> Stashed changes
 components:
   schemas:
     # Feed schema
