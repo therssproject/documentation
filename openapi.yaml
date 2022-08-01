@@ -114,6 +114,60 @@ paths:
         '200':
           description: Response
 
+  "/v1/endpoints":
+    # Create a new endpoint
+    post:
+      summary: Create a new endpoint
+      description: Create a new endpoint
+      operationId: application/create-endpoint
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - url
+                - title
+              properties:
+                url:
+                  type: string
+                  description: The URL of the endpoint
+                  example: https://api.mycoolproject.com/v1/webhooks/thressproject
+                title:
+                  type: string
+                  description: The endpoint title
+                  example: My production endpoint
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Endpoint"
+
+    # Query endpoints
+    get:
+      summary: Query endpoints
+      description: Query endpoints
+      operationId: application/query-endpoint
+      parameters:
+        - name: from
+          in: query
+          description: ISO string date representing the start date
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Endpoint"
+
 components:
   schemas:
     # Feed schema
@@ -169,4 +223,28 @@ components:
             attribute is sent on webhooks. It is usually used to store information
             from external systems to easily identify the subscription.
         created_at:
+          type: date
+
+    # Endpoint schema
+    Endpoint:
+      type: object
+      required:
+        - id
+        - application
+        - url
+        - title
+        - created_at
+        - updated_at
+      properties:
+        id:
+          type: string
+        application:
+          type: string
+        url:
+          type: string
+        title:
+          type: string
+        created_at:
+          type: date
+        updated_at:
           type: date
