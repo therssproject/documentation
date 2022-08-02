@@ -1,4 +1,5 @@
 openapi: 3.1.0
+
 info:
   version: 1.0.0
   title: therssproject v1 REST API
@@ -6,11 +7,17 @@ info:
   contact:
     name: Support
     url: https://therssproject.com
+
 servers:
 - url: https://api.therssproject.com
+
 externalDocs:
   description: therssproject's v1 REST API
   url: https://www.therssproject.com/documentation
+
+security:
+  - ApiKeyAuthentication: []
+
 paths:
 
   "/v1/feeds":
@@ -200,7 +207,7 @@ components:
         description:
           type: string
         published_at:
-          type: date
+          type: string
 
     # Subscription schema
     Subscription:
@@ -223,7 +230,7 @@ components:
             attribute is sent on webhooks. It is usually used to store information
             from external systems to easily identify the subscription.
         created_at:
-          type: date
+          type: string
 
     # Endpoint schema
     Endpoint:
@@ -245,6 +252,12 @@ components:
         title:
           type: string
         created_at:
-          type: date
+          type: string
         updated_at:
-          type: date
+          type: string
+
+  securitySchemes:
+    ApiKeyAuthentication:
+      type: apiKey
+      in: header
+      name: Authorization
