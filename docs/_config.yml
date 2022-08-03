@@ -1,0 +1,31 @@
+remote_theme: pmarsceill/just-the-docs
+
+search_enabled: true
+
+heading_anchors: true
+
+color_scheme: light
+
+logo: "/assets/images/logo.png"
+
+# Aux links for the upper right navigation
+aux_links:
+  "Site":
+    - "https://therssproject.com"
+  'GitHub':
+    - 'https://github.com/therssproject/documentation'
+
+aux_links_new_tab: false
+
+gh_edit_link: true
+gh_edit_link_text: "Edit on GitHub."
+gh_edit_repository: "https://github.com/therssproject/documentation"
+gh_edit_branch: "main"
+gh_edit_source: docs
+gh_edit_view_mode: "edit"
+
+# TODO: add custom colors
+#   Define all the colors from https://github.com/just-the-docs/just-the-docs/blob/main/_sass/support/_variables.scss
+#   On _sass/color_schemes/therssproject.scss
+#   The reference the color scheme:
+# color_scheme: therssproject
