@@ -10,10 +10,8 @@ logo: "/assets/images/logo.png"
 
 # Aux links for the upper right navigation
 aux_links:
-  "Site":
+  "Back to site":
     - "https://therssproject.com"
-  'GitHub':
-    - 'https://github.com/therssproject/documentation'
 
 aux_links_new_tab: false
 
