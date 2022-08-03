@@ -8,7 +8,6 @@ color_scheme: light
 
 logo: "/assets/images/logo.png"
 
-# Aux links for the upper right navigation
 aux_links:
   "Back to site":
     - "https://therssproject.com"
