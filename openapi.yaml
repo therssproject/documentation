@@ -39,6 +39,8 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Feed"
+        '401':
+          $ref: '#/components/responses/Unauthorized'
 
   "/v1/subscriptions":
     # Create a new subscription
@@ -74,6 +76,8 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Subscription"
+        '401':
+          $ref: '#/components/responses/Unauthorized'
 
     # Query subscriptions
     get:
@@ -97,6 +101,8 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/Subscription"
+        '401':
+          $ref: '#/components/responses/Unauthorized'
 
   "/v1/subscriptions/{subscription_id}":
     # Get subscription by ID
@@ -111,6 +117,8 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Subscription"
+        '401':
+          $ref: '#/components/responses/Unauthorized'
 
     # Remove subscription by ID
     delete:
@@ -120,6 +128,8 @@ paths:
       responses:
         '200':
           description: Response
+        '401':
+          $ref: '#/components/responses/Unauthorized'
 
   "/v1/endpoints":
     # Create a new endpoint
@@ -152,6 +162,8 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Endpoint"
+        '401':
+          $ref: '#/components/responses/Unauthorized'
 
     # Query endpoints
     get:
@@ -174,6 +186,8 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/Endpoint"
+        '401':
+          $ref: '#/components/responses/Unauthorized'
 
 components:
   schemas:
@@ -261,3 +275,7 @@ components:
       type: apiKey
       in: header
       name: Authorization
+
+  responses:
+    Unauthorized:
+      description: Authentication information is missing or invalid
