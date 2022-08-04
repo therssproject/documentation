@@ -1,9 +1,12 @@
 ---
 title: Authorization
-nav_order: 2
+nav_order: 1
+parent: Get Started
 ---
 
 # Authorization: API Keys
+
+In order to use this API create an account on <https://www.therssproject.com>
 
 To be able to create subscriptions and parse feeds using the public API an API key is required. The API key should be sent on the `Authorization` header of every request.
 

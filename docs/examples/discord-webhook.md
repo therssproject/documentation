@@ -1,9 +1,10 @@
 ---
-title: Example: Discord Webhook
-nav_order: 7
+title: Discord Webhook
+nav_order: 1
+parent: Examples
 ---
 
-# Example: Discord Webhook
+# Discord Webhook
 
 Send messages to a channel on a Discord server using the Discord Webhook Integration.
 

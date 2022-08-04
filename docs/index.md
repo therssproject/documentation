@@ -9,10 +9,8 @@ nav_order: 1
 
 <h1 align="center">therssproject API</h1>
 
-In order to use this API create an account on <https://www.therssproject.com>
+Welcome to [therssproject.com](https://therssproject.com) API documentation.
 
-1. [Authorization](/authorization)
-2. [Endpoints](/endpoints)
-3. [Subscriptions](/subscriptions)
-4. [Webhook events](/webhook-events)
-5. [Parse a feed](/parse-feeds)
+To get starte check out the [Getting Started](/guide/) guide.
+
+If you are looking for inspiration go to [examples](/examples/).
