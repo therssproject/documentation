@@ -1,7 +1,7 @@
 ---
 title: Endpoints
 nav_order: 2
-parent: Get Started
+parent: Getting Started
 ---
 
 # Register an endpoint

@@ -1,7 +1,7 @@
 ---
 title: Subscriptions
 nav_order: 3
-parent: Get Started
+parent: Getting Started
 ---
 
 # Create a feed subscription

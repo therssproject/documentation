@@ -1,7 +1,7 @@
 ---
 title: Parse feeds
 nav_order: 5
-parent: Get Started
+parent: Getting Started
 ---
 
 # Parse feeds

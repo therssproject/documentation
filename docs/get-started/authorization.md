@@ -1,7 +1,7 @@
 ---
 title: Authorization
 nav_order: 1
-parent: Get Started
+parent: Getting Started
 ---
 
 # Authorization: API Keys
