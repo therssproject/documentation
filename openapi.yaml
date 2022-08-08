@@ -70,7 +70,7 @@ paths:
                     attribute is sent on webhooks. It is usually used to store information
                     from external systems to easily identify the subscription.
       responses:
-        '200':
+        '201':
           description: Response
           content:
             application/json:
@@ -126,7 +126,7 @@ paths:
       description: Removes a subscription by ID
       operationId: application/remove-subscription
       responses:
-        '200':
+        '204':
           description: Response
         '401':
           $ref: '#/components/responses/Unauthorized'
@@ -156,7 +156,7 @@ paths:
                   description: The endpoint title
                   example: My production endpoint
       responses:
-        '200':
+        '201':
           description: Response
           content:
             application/json:
