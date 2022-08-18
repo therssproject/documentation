@@ -6,11 +6,15 @@ parent: Getting Started
 
 # Register an endpoint
 
-To be able to subscribe to feeds (RSS, Atom, JSON), first you should register an _endpoint_.
-
-`theressproject` servers will send webhook events with new feed entries to this endpoint.
+To be able to subscribe to feeds (RSS, Atom, JSON), first you should register an endpoint.
+This endpoint is used by our servers to send webhook events with new feed entries.
+Multiple endpoints can be created, and each subscription can be attached to a different endpoint.
 
 An use case example would be to have "production" and "test" endpoints for the same application.
+
+An endpoint can be created using the dashboard in https://www.therssproject.com or by making an API request using the previously created API Key.
+
+To create an endpoint using the API, use the following `curl` example with the required attributes.
 
 **Attributes**:
 
@@ -25,7 +29,7 @@ curl https://api.therssproject.com/v1/endpoints \
   -H "Authorization: <api-key>" \
   -H "Content-Type: application/json" \
   -d '{
-    "title": "My endpoint",
+    "title": "My production endpoint",
     "url": "https://myserver.com/webhooks/rss"
   }'
 ```

@@ -8,7 +8,11 @@ parent: Getting Started
 
 Once an endpoint is registered you can create feed subscriptions attached to that endpoint.
 
-`therssproject` API will listed for new entries on the feed and send webhook events to the endpoint with the new entries.
+`therssproject` servers will listen for new entries on the feed and send webhook events to the endpoint with the new entries.
+
+A feed subscription can be created using the dashboard in https://www.therssproject.com or by making an API request using the previously created API Key.
+
+To create a feed subscription using the API, use the following `curl` example with the required attributes.
 
 **Attributes**:
 
@@ -26,7 +30,7 @@ curl https://api.therssproject.com/v1/subscriptions \
   -d '{
     "endpoint": "62a553394a314dde29ceee6f",
     "url": "https://www.reddit.com/r/argentina/.rss",
-	"metadata": { "foo": "bar" }
+	  "metadata": { "foo": "bar" }
   }'
 ```
 

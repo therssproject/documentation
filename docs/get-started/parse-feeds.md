@@ -7,7 +7,7 @@ parent: Getting Started
 # Parse feeds
 
 
-`therssproject` also supports parsing feeds on demand.
+`therssproject` supports parsing feeds on demand.
 
 **Query**
 
