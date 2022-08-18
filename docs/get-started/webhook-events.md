@@ -4,7 +4,7 @@ nav_order: 4
 parent: Getting Started
 ---
 
-# Webhook Events
+# Webhook events
 
 Once a subscription is created, `therssproject` servers will listen for new entries on the feed and send webhook events to the endpoint with the new entries.
 
