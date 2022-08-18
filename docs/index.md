@@ -7,8 +7,6 @@ nav_order: 1
   <img align="center" src="/assets/images/logo.png" />
 </div>
 
-Welcome to [therssproject.com](https://therssproject.com) API documentation.
-
-To get starte check out the [Getting Started](/guide/) guide.
+Welcome to [therssproject.com](https://therssproject.com) API documentation. To get started check out the [Getting Started](/guide/) guide.
 
 If you are looking for inspiration go to [examples](/examples/).
