@@ -6,11 +6,9 @@ parent: Getting Started
 
 # Authorization: API Keys
 
-In order to use this API create an account on <https://www.therssproject.com>
-
 To be able to create subscriptions and parse feeds using the public API an API key is required. The API key should be sent on the `Authorization` header of every request.
 
-Go **Dashboard > Settings > API Keys** to create a key.
+To create a key go to **Dashboard > Settings > API Keys**.
 
 Here's a request example to parse the feed `https://www.reddit.com/r/argentina/.rss` using the API key on the `Authorization` header:
 

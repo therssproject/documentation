@@ -6,7 +6,7 @@ parent: Getting Started
 
 # Webhook Events
 
-Once a subscription is created, `therssproject` API will listed for new entries on the feed and send webhook events to the endpoint with the new entries.
+Once a subscription is created, `therssproject` servers will listen for new entries on the feed and send webhook events to the endpoint with the new entries.
 
 **Webhook payload example**:
 
